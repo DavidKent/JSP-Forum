@@ -25,9 +25,14 @@ public class RegisterForm {
 
     public String validate() throws SQLException {
         String errorMessage = "";
-        if(Database.isFound("SELECT * FROM " + UsersTable.NAME + " WHERE " + UsersTable.FIELDS_USER + " = '" + m_user + "'"))
+        String userCheck = "SELECT * FROM " + UsersTable.NAME + " WHERE " 
+                            + UsersTable.FIELDS_USER + " = '" + m_user + "'";
+        String emailCheck = "SELECT * FROM " + UsersTable.NAME + " WHERE "
+                            + UsersTable.FIELDS_EMAIL + " = '" + m_email + "'";
+        
+        if(Database.isFound(userCheck))
                 errorMessage += "The username '" + m_user + "' is already taken<br>";
-            if(Database.isFound("SELECT * FROM " + UsersTable.NAME + " WHERE " + UsersTable.FIELDS_EMAIL + " = '" + m_email + "'"))
+            if(Database.isFound(emailCheck))
                 errorMessage += "The email '" + m_email + "' is already in use<br>";
             if(m_pass.length() < 6)
                 errorMessage += "The password must be 6 characters or longer in length<br>";
@@ -39,8 +44,8 @@ public class RegisterForm {
         nonQuery += UsersTable.FIELDS_USER + ", ";
         nonQuery += UsersTable.FIELDS_PASS + ", ";
         nonQuery += UsersTable.FIELDS_EMAIL + ") ";
-        nonQuery += " VALUES (";
-        nonQuery += m_user + ", " + m_pass + ", " + m_email + " )";
+        nonQuery += " VALUES ('";
+        nonQuery += m_user + "', '" + m_pass + "', '" + m_email + "' )";
         Database.nonQuery(nonQuery);
     }
     

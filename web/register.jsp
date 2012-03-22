@@ -22,7 +22,9 @@
         if(isRequest) {
             RegisterForm rf = new RegisterForm(name, pass, email);
             errorMessage = rf.validate();
-        }
+            if(errorMessage.length() < 1)
+                rf.addToDatabase();
+          }
 
         %>
 <html>
@@ -33,8 +35,10 @@
     <body>
         <%
     if(isRequest) {
-            if(errorMessage.length() < 1)
+            if(errorMessage.length() < 1) {
                 out.println("<h1>You have successfully registered, redirecting you to the main page</h1>");
+                response.sendRedirect("index.jsp");
+              }
             else
                 out.println("<h1>Please review the following errors with your registration form: " + errorMessage + "</h1>");
         }
