@@ -1,0 +1,15 @@
+/* 
+    Document   : bootstrap
+    Created on : Mar 21, 2012, 5:19:32 PM
+    Author     : Zerotension
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root { 
+    display: block;
+}
+body {
+    background-color:black;
+}
+
