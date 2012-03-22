@@ -23,7 +23,7 @@ public class DataTable {
         m_cols += name + " " + type + ", ";
     }
     public void createTable() throws SQLException {
-        Database.nonQuery(getQuery());
+        Database.nonQuery(getQuery(), m_con);
     }
     public String getQuery() {
         String query = "CREATE TABLE IF NOT EXISTS ";

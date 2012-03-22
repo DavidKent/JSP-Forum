@@ -7,6 +7,7 @@ package Forums.Forms;
 import Forums.Constants.SessionsTable;
 import Forums.Constants.UsersTable;
 import Forums.Database;
+import java.sql.Connection;
 import java.sql.SQLException;
 
 /**
@@ -23,17 +24,17 @@ public class LoginForm {
         m_sessionID = sessionID;
     }
     
-    public boolean validate() throws SQLException {
+    public boolean validate(Connection con) throws SQLException {
        return Database.isFound("SELECT * FROM " + UsersTable.NAME + " WHERE " + UsersTable.FIELDS_USER + " = '" + m_user + "' AND " +
-                UsersTable.FIELDS_PASS + " = '" + m_pass + "'");
+                UsersTable.FIELDS_PASS + " = '" + m_pass + "'", con);
     }
     
-    public void addToDatabase() throws SQLException {
+    public void addToDatabase(Connection con) throws SQLException {
         String nonQuery = "INSERT INTO " + SessionsTable.NAME + " (";
         nonQuery += SessionsTable.FIELDS_USER + ", ";
         nonQuery += SessionsTable.FIELDS_ID + ") ";
         nonQuery += " VALUES ('";
         nonQuery += m_user + "', '" + m_sessionID + "' )";
-        Database.nonQuery(nonQuery);
+        Database.nonQuery(nonQuery, con);
     }
 }

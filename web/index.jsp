@@ -7,14 +7,16 @@
 <%@page import="Forums.Forms.LoginForm"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="Forums.*"%>
+<%@page import="java.sql.*"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <%
+            Connection con = Database.getConnection();
             boolean errors = false;
            
-            String user = PageRequest.loggedIn(request);
+            String user = PageRequest.loggedIn(request, con);
           
             if(user.length() != 0)
               response.sendRedirect("forums.jsp");
@@ -27,13 +29,14 @@
             
             if(isRequest) {
                  LoginForm lf = new LoginForm(name, pass, request.getSession().getId());
-                 errors = lf.validate();
+                 errors = lf.validate(con);
                  if(errors) {
-                        lf.addToDatabase();
+                        lf.addToDatabase(con);
                         response.sendRedirect("forums.jsp");
                    }
                  
             }
+            con.close();
         %>
         <!--<link rel=stylesheet type="text/css" href="bootstrap.css">-->
         <title>JSP Page</title>

@@ -4,10 +4,12 @@
     Author     : Zerotension
 --%>
 
+<%@page import="java.sql.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="Forums.*"%>
 <% 
-    Database.install();
+    Connection con = Database.getConnection();
+    Database.install(con);
 %>
 <!DOCTYPE html>
 <html>
@@ -19,3 +21,4 @@
         <h1>Welcome to the install page</h1>
     </body>
 </html>
+<% con.close(); %>

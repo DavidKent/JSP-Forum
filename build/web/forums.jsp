@@ -4,7 +4,8 @@
     Author     : Zerotension
 --%>
 
-<%@page import="Forums.PageRequest"%>
+<%@page import="Forums.*"%>
+<%@page import="java.sql.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -13,7 +14,6 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h2>Logged in as <%= PageRequest.loggedIn(request) %></h2>
-        <h1>Hello World!</h1>
+        <% ForumRequestHandler fr = new ForumRequestHandler(request, response, out); %>
     </body>
 </html>

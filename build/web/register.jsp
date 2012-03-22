@@ -4,12 +4,12 @@
     Author     : Zerotension
 --%>
 <%@page import="Forums.Forms.RegisterForm"%>
-<%@page import="Forums.Database"%>
-<%@page import="java.util.Map"%>
-<%@page import="Forums.PageRequest"%>
+<%@page import="Forums.*"%>
+<%@page import="java.sql.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
         <% 
+        Connection con = Database.getConnection();
         boolean isRequest = true;
         String errorMessage = "";
         String name = request.getParameter("user");
@@ -21,9 +21,9 @@
         
         if(isRequest) {
             RegisterForm rf = new RegisterForm(name, pass, email);
-            errorMessage = rf.validate();
+            errorMessage = rf.validate(con);
             if(errorMessage.length() < 1)
-                rf.addToDatabase();
+                rf.addToDatabase(con);
           }
 
         %>

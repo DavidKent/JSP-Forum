@@ -5,6 +5,7 @@
 package Forums;
 
 import Forums.Constants.SessionsTable;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
@@ -33,10 +34,10 @@ public class PageRequest {
      * @return username associated with session ID
      * @throws SQLException 
      */
-    public static String loggedIn(HttpServletRequest req) throws SQLException {
+    public static String loggedIn(HttpServletRequest req, Connection con) throws SQLException {
         String id = req.getSession(true).getId();
         String isFound = Database.isFound("SELECT * FROM " + SessionsTable.NAME + " WHERE " + SessionsTable.FIELDS_ID + 
-                " = '"+id+"'", "username");
+                " = '"+id+"'", "username", con);
         return isFound;
     }
 }

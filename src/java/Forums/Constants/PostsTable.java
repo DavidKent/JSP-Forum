@@ -11,6 +11,7 @@ package Forums.Constants;
 public class PostsTable {
     public static final String NAME = "hubs";
     public static final String FIELDS_PARENT = "parent";
+    public static final String FIELDS_TITLE = "title";
     public static final String FIELDS_TYPE = "type";
     public static final String FIELDS_DESCRIPTION = "description";
     public static final String FIELDS_CONTENT = "content";
